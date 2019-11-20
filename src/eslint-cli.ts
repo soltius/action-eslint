@@ -45,15 +45,25 @@ export async function eslint(filesList: string[]) {
       });
     }
   }
-
-  return {
-    conclusion: (errorCount > 0
-      ? 'failure'
-      : 'success') as import('@octokit/rest').ChecksCreateParams['conclusion'],
-    output: {
-      title: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`,
-      summary: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`,
-      annotations
-    }
-  };
+  if(annotations.length > 0){ 
+    return {
+      conclusion: (errorCount > 0
+        ? 'failure'
+        : 'success') as import('@octokit/rest').ChecksCreateParams['conclusion'],
+      output: {
+        title: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`,
+        summary: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`
+      }
+    };
+  } else {
+      return {
+      conclusion: (errorCount > 0
+        ? 'failure'
+        : 'success') as import('@octokit/rest').ChecksCreateParams['conclusion'],
+      output: {
+        title: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`,
+        summary: `${errorCount} error(s), ${warningCount} warning(s) found in ${filesList.length} file(s)`
+      }
+    };
+  }
 }
