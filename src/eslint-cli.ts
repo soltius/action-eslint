@@ -45,6 +45,7 @@ export async function eslint(filesList: string[]) {
       });
     }
   }
+  console.log("annotations:" + annotations);
   if(annotations.length > 0){ 
     return {
       conclusion: (errorCount > 0
