@@ -23,13 +23,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: rm -f .yarnclean
+      - run: rm .yarnclean
       - run: yarn --frozen-lockfile --ignore-engines --ignore-optional --no-bin-links --non-interactive --silent --ignore-scripts --production=false
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
           HUSKY_SKIP_INSTALL: true
-      # Alternative: if you use npm instead of yarn
-      # - run: npm ci --no-audit --prefer-offline
       - uses: tinovyatkin/action-eslint@v1
         with:
           repo-token: ${{secrets.GITHUB_TOKEN}}
